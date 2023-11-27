@@ -289,14 +289,17 @@ class ColorDetectionBot:
         current_focused_window = win32gui.GetForegroundWindow()
 
         # Set the target window as foreground
-        win32gui.SetForegroundWindow(hwnd)
-        time.sleep(0.025)
-        send_keys(KEY_TO_PRESS)  # Simulate key press
-        time.sleep(0.025)
-        send_keys(KEY_TO_PRESS)  # Release key
+        try:
+            win32gui.SetForegroundWindow(hwnd)
+            time.sleep(0.01)
+            send_keys(KEY_TO_PRESS)  # Simulate key press
+            time.sleep(0.01)
+            send_keys(KEY_TO_PRESS)  # Release key
 
-        # Restore focus to the previously focused window
-        win32gui.SetForegroundWindow(current_focused_window)
+            # Restore focus to the previously focused window
+            win32gui.SetForegroundWindow(current_focused_window)
+        except:
+            print(f"Error while focusing the window")
 
 # Main application execution
 if __name__ == "__main__":
